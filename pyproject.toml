@@ -1,0 +1,52 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "atmostab"
+version = "1.1.0"
+description = "Индексы неустойчивости атмосферы (KI, SWEAT, EHI, BRN, ...) на данных анализа GFS 0.25°"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Александр Степанец" }]
+keywords = [
+    "meteorology",
+    "atmospheric-instability",
+    "convection",
+    "SWEAT",
+    "GFS",
+    "GRIB2",
+    "xarray",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Atmospheric Science",
+    "Intended Audience :: Science/Research",
+]
+dependencies = [
+    "numpy>=1.24",
+    "xarray>=2023.1",
+    "netCDF4>=1.6",
+    "cfgrib>=0.9.13",
+    "eccodes>=2.37",
+    "matplotlib>=3.7",
+    "cartopy>=0.21",
+    "pandas>=2.0",
+    "click>=8.1",
+    "requests>=2.28",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[project.scripts]
+atmostab = "atmostab.cli:main"
+atmostab-download = "atmostab.download:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/atmostab"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
